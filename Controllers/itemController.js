@@ -117,3 +117,10 @@ export const updatePost = catchAsyncErrors(async (req, res, next) => {
     item,
   });
 });
+
+export const preventInactivity = catchAsyncErrors(async (req, res, next) => {
+  res.status(200).json({
+    success: true,
+    message: "Server Ping Success",
+  });
+});
