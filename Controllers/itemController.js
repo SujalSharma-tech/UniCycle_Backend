@@ -9,9 +9,18 @@ export const ItemPost = catchAsyncErrors(async (req, res, next) => {
   }
 
   let { images } = req.files;
+  const allowedFormats = ["image/jpeg", "image/jpg", "image/webp", "image/png"];
 
   const imageIds = [];
   for (const img of Array.isArray(images) ? images : [images]) {
+    if (!allowedFormats.includes(img.mimetype)) {
+      return next(
+        new ErrorHandler(
+          "Upload picture only in [.jpg, .png, .webp] formats",
+          400
+        )
+      );
+    }
     const result = await cloudinary.uploader.upload(img.tempFilePath);
     if (!result) {
       return next(new ErrorHandler("Error uploading", 400));

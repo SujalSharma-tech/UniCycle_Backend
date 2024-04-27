@@ -12,7 +12,7 @@ const ItemSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: [5, "Title must contain atleast 5 Characters"],
-    maxLength: [40, "Title must not exceed 40 Characters"],
+    maxLength: [500, "Title must not exceed 500 Characters"],
   },
   price: {
     type: Number,
